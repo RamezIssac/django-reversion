@@ -1,5 +1,3 @@
-import sys
-sys.path.insert(0, "src")
 from setuptools import setup, find_packages
 from reversion import __version__
 
@@ -7,40 +5,31 @@ from reversion import __version__
 # Load in babel support, if available.
 try:
     from babel.messages import frontend as babel
-    cmdclass = {"compile_catalog": babel.compile_catalog,
-                "extract_messages": babel.extract_messages,
-                "init_catalog": babel.init_catalog,
-                "update_catalog": babel.update_catalog,}
+    cmdclass = {
+        "compile_catalog": babel.compile_catalog,
+        "extract_messages": babel.extract_messages,
+        "init_catalog": babel.init_catalog,
+        "update_catalog": babel.update_catalog,
+    }
 except ImportError:
     cmdclass = {}
 
 setup(
-    name = "django-reversion",
-    version = '.'.join(str(x) for x in __version__),
-    license = "BSD",
-    description = "An extension to the Django web framework that provides comprehensive version control facilities",
-    author = "Dave Hall",
-    author_email = "dave@etianen.com",
-    url = "http://github.com/etianen/django-reversion",
-    zip_safe = False,
-    packages = find_packages("src"),
-    package_dir = {
-        "": "src",
-    },
-    package_data = {
+    name="django-reversion",
+    version='.'.join(str(x) for x in __version__),
+    license="BSD",
+    description="An extension to the Django web framework that provides version control for model instances.",
+    author="Dave Hall",
+    author_email="dave@etianen.com",
+    url="http://github.com/etianen/django-reversion",
+    zip_safe=False,
+    packages=find_packages(),
+    package_data={
         "reversion": ["locale/*/LC_MESSAGES/django.*", "templates/reversion/*.html"]},
-    cmdclass = cmdclass,
-    install_requires = [
-        "django>=1.7",
+    cmdclass=cmdclass,
+    install_requires=[
+        "django>=1.8",
     ],
-    extras_require = {
-        "diff": [
-            "diff_match_patch",
-        ],
-        "test": [
-            "coverage",
-        ],
-    },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
@@ -48,11 +37,9 @@ setup(
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         "Framework :: Django",
     ]
 )
